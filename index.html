@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pro Typer - Enhance your typing speed 🚀</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <!-- AOS (Animate on Scroll) CSS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #C1E8FF;
+    }
+  </style>
+</head>
+<body class="text-gray-800 font-sans">
+
+  <!-- Hero Section -->
+  <section class="min-h-screen flex flex-col justify-center items-center text-center px-6">
+    <img src="logo.png" alt="Pro Typer Logo" class="w-24 h-24 mb-4 rounded-full shadow-md" />
+    <h1 class="text-5xl font-extrabold mb-4 text-gray-900">Pro Typer</h1>
+    <p class="text-xl mb-6 text-gray-700 flex items-center justify-center gap-2">
+      Enhance your typing speed 
+      <span class="text-2xl">🚀</span>
+    </p>
+    <div class="flex gap-4">
+      <a href="#features" id="exploreBtn" class="px-6 py-3 bg-blue-600 text-white rounded-xl shadow hover:bg-blue-700">Explore Features</a>
+      <a href="https://play.google.com/store/apps/details?id=com.samarthshukla.protyper" target="_blank" class="px-6 py-3 bg-gray-200 text-gray-800 rounded-xl shadow hover:bg-gray-300">Download Now</a>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="bg-white py-16 px-6">
+    <div class="max-w-6xl mx-auto space-y-20">
+
+      <!-- Single Word Mode -->
+      <div class="flex flex-col md:flex-row items-center md:justify-between gap-8" data-aos="fade-right">
+        <div class="md:w-1/2 text-center md:text-left">
+          <h3 class="text-3xl font-bold mb-4">Single Word Mode</h3>
+          <p class="text-gray-700 text-lg">
+            Type one word at a time. Choose from Easy, Medium, or Hard and beat your high score. Train to be faster and more accurate with each word!
+          </p>
+        </div>
+        <div class="md:w-1/2">
+          <img src="singleword.jpg" alt="Single Word Mode Screenshot" class="rounded-xl shadow-lg w-full max-w-xs mx-auto" />
+        </div>
+      </div>
+
+      <!-- Paragraph Mode -->
+      <div class="flex flex-col md:flex-row-reverse items-center md:justify-between gap-8" data-aos="fade-left">
+        <div class="md:w-1/2 text-center md:text-left">
+          <h3 class="text-3xl font-bold mb-4">Paragraph Mode</h3>
+          <p class="text-gray-700 text-lg">
+            Practice typing longer texts. At the end, get your Words Per Minute (WPM), accuracy, and total mistakes. Perfect for improving fluency.
+          </p>
+        </div>
+        <div class="md:w-1/2">
+          <img src="paragraph.jpg" alt="Paragraph Mode Screenshot" class="rounded-xl shadow-lg w-full max-w-xs mx-auto" />
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="py-16 px-6 bg-blue-600 text-white text-center">
+    <h2 class="text-3xl font-bold mb-4">Ready to boost your typing skills?</h2>
+    <a href="https://play.google.com/store/apps/details?id=com.samarthshukla.protyper" class="px-8 py-3 bg-white text-blue-600 font-semibold rounded-xl shadow hover:bg-gray-100">Get Pro Typer on Play Store</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-8">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
+      <p class="mb-4 md:mb-0">&copy; 2025 Pro Typer. All rights reserved.</p>
+      <div class="flex gap-6 mb-4 md:mb-0">
+        <a href="https://www.instagram.com/yourusername" target="_blank" class="hover:underline">Instagram</a>
+        <a href="https://www.twitter.com/yourusername" target="_blank" class="hover:underline">Twitter</a>
+        <a href="aboutus.html" target="_blank" class="hover:underline">About Us</a>
+      </div>
+      <a href="privacy-policy.html" class="hover:underline">Privacy Policy</a>
+    </div>
+  </footer>
+
+  <!-- AOS (Animate on Scroll) JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      once: true,
+    });
+  </script>
+
+<script>
+  document.getElementById('exploreBtn').addEventListener('click', function(event) {
+    event.preventDefault();
+    document.querySelector('#features').scrollIntoView({ behavior: 'smooth' });
+  });
+</script>
+
+</body>
+</html>
