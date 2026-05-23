@@ -1,101 +1,399 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pro Typer - Enhance your typing speed 🚀</title>
+  <title>Pro Typer - Type Fast. Race Faster. 🚀</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-  <!-- AOS (Animate on Scroll) CSS -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+  
   <style>
     body {
-      background-color: #C1E8FF;
+      font-family: 'Inter', sans-serif;
+      color: #1E293B; 
+      overflow-x: hidden;
+      margin: 0;
     }
+
+    /* Fixed Canvas Background */
+    #groovy-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+    }
+
+    /* Modern Light Glass Card */
+    .bento-card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 10px 40px -10px rgba(0, 100, 200, 0.15);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease;
+      border-radius: 1.5rem;
+      overflow: hidden;
+    }
+    
+    .bento-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px -10px rgba(0, 100, 200, 0.25);
+    }
+
+    /* Subtle continuous floating animation for app screenshots */
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+    .floating-img {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
   </style>
 </head>
-<body class="text-gray-800 font-sans">
+<body class="relative">
 
-  <!-- Hero Section -->
-  <section class="min-h-screen flex flex-col justify-center items-center text-center px-6">
-    <img src="logo.png" alt="Pro Typer Logo" class="w-24 h-24 mb-4 rounded-full shadow-md" />
-    <h1 class="text-5xl font-extrabold mb-4 text-gray-900">Pro Typer</h1>
-    <p class="text-xl mb-6 text-gray-700 flex items-center justify-center gap-2">
-      Enhance your typing speed 
-      <span class="text-2xl">🚀</span>
+  <canvas id="groovy-canvas"></canvas>
+
+  <nav class="fixed w-full z-50 bg-white bg-opacity-70 backdrop-filter backdrop-blur-lg py-4 px-4 sm:px-6 transition-all shadow-sm">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <img src="assets/logo.png" alt="Pro Typer Logo" class="w-10 h-10 rounded-xl shadow-sm" />
+        <span class="text-xl font-extrabold tracking-tight text-gray-900">Pro Typer</span>
+      </div>
+      <div class="hidden md:flex gap-8 font-semibold text-gray-700">
+        <a href="#features" class="hover:text-blue-600 transition-colors">Features</a>
+        <a href="#progression" class="hover:text-blue-600 transition-colors">Ranks & XP</a>
+        <a href="aboutus.html" class="hover:text-blue-600 transition-colors">Developers</a>
+      </div>
+      <a href="https://play.google.com/store/apps/details?id=com.samarthshukla.protyper" target="_blank" class="px-4 sm:px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition-all shadow-md text-sm sm:text-base">
+        Download
+      </a>
+    </div>
+  </nav>
+
+  <section class="min-h-screen flex flex-col justify-center items-center text-center px-4 sm:px-6 pt-24 pb-12 relative z-10">
+    <div data-aos="zoom-in" data-aos-duration="1000">
+      <img src="assets/logo.png" alt="Pro Typer Logo" class="w-20 h-20 sm:w-28 sm:h-28 mb-8 rounded-2xl shadow-xl mx-auto floating-img bg-white p-2" />
+    </div>
+    
+    <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold mb-6 tracking-tight text-gray-900 drop-shadow-md">
+      <span id="typewriter" class="cursor"></span>
+    </h1>
+    
+    <p class="text-lg sm:text-xl md:text-2xl mb-10 text-gray-800 max-w-2xl font-medium drop-shadow-sm px-2" data-aos="fade-up" data-aos-delay="200">
+      Enhance your typing speed, climb global ranks, and challenge real players in the ultimate typing arena.
     </p>
-    <div class="flex gap-4">
-      <a href="#features" id="exploreBtn" class="px-6 py-3 bg-blue-600 text-white rounded-xl shadow hover:bg-blue-700">Explore Features</a>
-      <a href="https://play.google.com/store/apps/details?id=com.samarthshukla.protyper" target="_blank" class="px-6 py-3 bg-gray-200 text-gray-800 rounded-xl shadow hover:bg-gray-300">Download Now</a>
+    
+    <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto" data-aos="fade-up" data-aos-delay="300">
+      <a href="https://play.google.com/store/apps/details?id=com.samarthshukla.protyper" target="_blank" class="px-8 py-4 bg-gray-900 hover:bg-black text-white font-bold rounded-full shadow-2xl text-lg transition-transform transform hover:scale-105 w-full sm:w-auto">
+        Get it on Google Play
+      </a>
+      <a href="#features" id="exploreBtn" class="px-8 py-4 bg-white bg-opacity-80 hover:bg-opacity-100 text-gray-900 font-bold rounded-full shadow-lg text-lg transition-all flex items-center justify-center gap-2 w-full sm:w-auto">
+        Explore Modes
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+      </a>
     </div>
   </section>
 
-  <!-- Features -->
-  <section id="features" class="bg-white py-16 px-6">
-    <div class="max-w-6xl mx-auto space-y-20">
-
-      <!-- Single Word Mode -->
-      <div class="flex flex-col md:flex-row items-center md:justify-between gap-8" data-aos="fade-right">
-        <div class="md:w-1/2 text-center md:text-left">
-          <h3 class="text-3xl font-bold mb-4">Single Word Mode</h3>
-          <p class="text-gray-700 text-lg">
-            Type as many words as you can before time runs out. Choose from Easy, Medium, or Hard and beat your high score. Train to be faster and more accurate with each word!
+  <section id="features" class="py-16 sm:py-20 px-4 sm:px-6 relative z-10 max-w-6xl mx-auto">
+    <div class="flex flex-col gap-12 sm:gap-16">
+      
+      <div class="bento-card p-6 sm:p-10 lg:p-16 flex flex-col lg:flex-row items-center gap-8 sm:gap-12" data-aos="fade-up">
+        <div class="lg:w-1/2 text-center lg:text-left z-20">
+          <h3 class="text-3xl sm:text-4xl md:text-5xl font-black mb-4 sm:mb-6 text-gray-900 leading-tight">Real-Time<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-500">Multiplayer Arena</span></h3>
+          <p class="text-gray-700 text-base sm:text-lg md:text-xl leading-relaxed font-medium">
+            Go head-to-head against other typists worldwide. Race cars across the screen in real-time as you type, and prove you are the fastest to cross the finish line!
           </p>
         </div>
-        <div class="md:w-1/2">
-          <img src="singleword.jpg" alt="Single Word Mode Screenshot" class="rounded-xl shadow-lg w-full max-w-xs mx-auto" />
+        <div class="lg:w-1/2 w-full relative mt-8 lg:mt-0 flex items-center justify-center py-10">
+          <img src="assets/multiplayer3.jpg" alt="Multiplayer Screen 1" class="absolute w-28 sm:w-40 md:w-56 rounded-2xl shadow-lg transform -translate-x-12 sm:-translate-x-16 md:-translate-x-24 -rotate-12 opacity-70 hover:opacity-100 hover:rotate-0 hover:scale-110 hover:z-30 transition-all duration-500 cursor-pointer">
+          <img src="assets/multiplayer2.jpg" alt="Multiplayer Screen 2" class="absolute w-28 sm:w-40 md:w-56 rounded-2xl shadow-lg transform translate-x-12 sm:translate-x-16 md:translate-x-24 rotate-12 opacity-70 hover:opacity-100 hover:rotate-0 hover:scale-110 hover:z-30 transition-all duration-500 cursor-pointer">
+          <img src="assets/multiplayer1.jpg" alt="Multiplayer Screen 3" class="relative w-36 sm:w-48 md:w-64 rounded-2xl shadow-2xl z-20 transform hover:scale-110 hover:z-30 transition-all duration-500 border-4 border-white cursor-pointer floating-img" style="animation-delay: 0s;">
         </div>
       </div>
 
-      <!-- Paragraph Mode -->
-      <div class="flex flex-col md:flex-row-reverse items-center md:justify-between gap-8" data-aos="fade-left">
-        <div class="md:w-1/2 text-center md:text-left">
-          <h3 class="text-3xl font-bold mb-4">Paragraph Mode</h3>
-          <p class="text-gray-700 text-lg">
-            Tackle full paragraphs with a 2-minute time limit. At the end, get your Words Per Minute (WPM) and accuracy. Perfect for improving fluency.
+      <div class="bento-card p-6 sm:p-10 lg:p-16 flex flex-col lg:flex-row-reverse items-center gap-8 sm:gap-12" data-aos="fade-up">
+        <div class="lg:w-1/2 text-center lg:text-left z-20">
+          <h3 class="text-3xl sm:text-4xl md:text-5xl font-black mb-4 sm:mb-6 text-gray-900 leading-tight">Survive The<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-500">Single Word Mode</span></h3>
+          <p class="text-gray-700 text-base sm:text-lg md:text-xl leading-relaxed font-medium">
+            Type as many words as you can before the clock runs out. Choose Easy, Medium, or Hard and build your streak to maximize your score. One mistake could cost you everything!
           </p>
         </div>
-        <div class="md:w-1/2">
-          <img src="paragraph.jpg" alt="Paragraph Mode Screenshot" class="rounded-xl shadow-lg w-full max-w-xs mx-auto" />
+        <div class="lg:w-1/2 w-full relative mt-8 lg:mt-0 flex items-center justify-center py-10">
+          <img src="assets/singleword1.jpg" alt="Survival Screen 1" class="absolute w-28 sm:w-40 md:w-56 rounded-2xl shadow-lg transform -translate-y-6 sm:-translate-y-8 md:-translate-y-12 -translate-x-8 sm:-translate-x-12 md:-translate-x-20 opacity-80 hover:opacity-100 hover:rotate-0 hover:scale-110 hover:z-30 transition-all duration-500 cursor-pointer">
+          <img src="assets/singleword3.jpg" alt="Survival Screen 2" class="absolute w-28 sm:w-40 md:w-56 rounded-2xl shadow-lg transform translate-y-6 sm:translate-y-8 md:translate-y-12 translate-x-8 sm:translate-x-12 md:translate-x-20 opacity-80 hover:opacity-100 hover:rotate-0 hover:scale-110 hover:z-30 transition-all duration-500 cursor-pointer">
+          <img src="assets/singleword2.jpg" alt="Survival Screen 3" class="relative w-36 sm:w-48 md:w-64 rounded-2xl shadow-2xl z-20 transform hover:scale-110 hover:z-30 transition-all duration-500 border-4 border-white cursor-pointer floating-img" style="animation-delay: 0.5s;">
+        </div>
+      </div>
+
+      <div class="bento-card p-6 sm:p-10 lg:p-16 flex flex-col items-center gap-8 sm:gap-12" data-aos="fade-up">
+        <div class="text-center z-20 max-w-3xl">
+          <h3 class="text-3xl sm:text-4xl md:text-5xl font-black mb-4 sm:mb-6 text-gray-900 leading-tight">Master The<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500">Paragraph Mode</span></h3>
+          <p class="text-gray-700 text-base sm:text-lg md:text-xl leading-relaxed font-medium">
+            Calculate your true WPM and Accuracy by typing full passages. Master your punctuation, capitalization, and speed to achieve a flawless run.
+          </p>
+        </div>
+        <div class="w-full relative flex items-center justify-center mt-6 py-10">
+          <img src="assets/paragraph2.jpg" alt="Paragraph Screen 1" class="absolute w-28 sm:w-40 md:w-64 rounded-2xl shadow-lg transform -translate-x-16 sm:-translate-x-24 md:-translate-x-56 -rotate-6 opacity-60 hover:opacity-100 hover:rotate-0 hover:scale-110 hover:z-30 transition-all duration-500 cursor-pointer">
+          <img src="assets/paragraph3.jpg" alt="Paragraph Screen 2" class="absolute w-28 sm:w-40 md:w-64 rounded-2xl shadow-lg transform translate-x-16 sm:translate-x-24 md:translate-x-56 rotate-6 opacity-60 hover:opacity-100 hover:rotate-0 hover:scale-110 hover:z-30 transition-all duration-500 cursor-pointer">
+          <img src="assets/paragraph1.jpg" alt="Paragraph Screen 3" class="relative w-36 sm:w-48 md:w-72 rounded-2xl shadow-2xl z-20 transform hover:scale-110 hover:z-30 transition-all duration-500 border-4 border-white cursor-pointer floating-img" style="animation-delay: 1s;">
+        </div>
+      </div>
+
+      <div class="bento-card p-6 sm:p-10 lg:p-16 flex flex-col items-center gap-8 sm:gap-12" data-aos="fade-up">
+  <div class="text-center z-20 max-w-3xl">
+    <h3 class="text-3xl sm:text-4xl md:text-5xl font-black mb-4 sm:mb-6 text-gray-900 leading-tight">Analyze Every Performance in<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-500">Pro Typer</span></h3>
+    <p class="text-gray-700 text-base sm:text-lg md:text-xl leading-relaxed font-medium">
+      Every keystroke is recorded. Seamlessly navigate between game modes and your detailed profile to see exactly where you excel and where you can type even faster.
+    </p>
+  </div>
+  <div class="w-full flex flex-row items-center justify-center gap-4 sm:gap-6 md:gap-8 mt-6 py-6">
+    <img src="assets/home3.jpg" alt="Paragraph Screen 1" class="w-24 sm:w-40 md:w-64 rounded-2xl shadow-lg transform transition-all duration-500 hover:scale-110 cursor-pointer floating-img" style="animation-delay: 0s;">
+    <img src="assets/home1.jpg" alt="Paragraph Screen 3" class="w-24 sm:w-40 md:w-64 rounded-2xl shadow-2xl transform transition-all duration-500 hover:scale-110 border-2 sm:border-4 border-white cursor-pointer floating-img" style="animation-delay: 0.5s;">
+    <img src="assets/home2.jpg" alt="Paragraph Screen 2" class="w-24 sm:w-40 md:w-64 rounded-2xl shadow-lg transform transition-all duration-500 hover:scale-110 cursor-pointer floating-img" style="animation-delay: 1s;">
+  </div>
+</div>
+
+    </div>
+  </section>
+
+  <section id="progression" class="py-16 sm:py-20 px-4 sm:px-6 relative z-10 max-w-7xl mx-auto">
+    <div class="text-center mb-12 sm:mb-16" data-aos="fade-up">
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">The XP & Levelling System</h2>
+      <p class="text-base sm:text-xl text-gray-700 font-medium max-w-2xl mx-auto">Play games to earn XP, fill your vault, and climb through the 5 global competitive tiers!</p>
+    </div>
+
+    <div class="mb-12 sm:mb-16" data-aos="fade-up" data-aos-delay="100">
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
+        
+        <div class="group relative flex flex-col items-center justify-between p-4 sm:p-6 bg-white bg-opacity-60 backdrop-blur-md border border-white rounded-2xl sm:rounded-[2rem] shadow-lg transition-all duration-500 hover:-translate-y-2 sm:hover:-translate-y-4 hover:shadow-2xl overflow-hidden cursor-pointer">
+          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 sm:w-32 sm:h-32 bg-gray-400 rounded-full blur-2xl opacity-20 group-hover:opacity-60 transition-opacity duration-500"></div>
+          <div class="relative z-10 h-32 sm:h-40 md:h-48 flex items-center justify-center w-full">
+            <img src="assets/tier-graphics/ic_keystroke.PNG" alt="Keystroke" class="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 object-contain drop-shadow-xl transform transition-transform duration-500 group-hover:scale-110 floating-img" style="animation-delay: 0s;">
+          </div>
+          <div class="relative z-10 text-center mt-2 sm:mt-4">
+            <span class="block text-[10px] sm:text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Tier 1</span>
+            <span class="block text-base sm:text-xl md:text-2xl font-black text-gray-800">Keystroke</span>
+          </div>
+        </div>
+
+        <div class="group relative flex flex-col items-center justify-between p-4 sm:p-6 bg-white bg-opacity-60 backdrop-blur-md border border-white rounded-2xl sm:rounded-[2rem] shadow-lg transition-all duration-500 hover:-translate-y-2 sm:hover:-translate-y-4 hover:shadow-2xl overflow-hidden cursor-pointer">
+          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 sm:w-32 sm:h-32 bg-green-400 rounded-full blur-2xl opacity-20 group-hover:opacity-60 transition-opacity duration-500"></div>
+          <div class="relative z-10 h-32 sm:h-40 md:h-48 flex items-center justify-center w-full">
+            <img src="assets/tier-graphics/ic_sprinter.PNG" alt="Sprinter" class="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 object-contain drop-shadow-xl transform transition-transform duration-500 group-hover:scale-110 floating-img" style="animation-delay: 0.2s;">
+          </div>
+          <div class="relative z-10 text-center mt-2 sm:mt-4">
+            <span class="block text-[10px] sm:text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Tier 2</span>
+            <span class="block text-base sm:text-xl md:text-2xl font-black text-green-700">Sprinter</span>
+          </div>
+        </div>
+
+        <div class="group relative flex flex-col items-center justify-between p-4 sm:p-6 bg-white bg-opacity-60 backdrop-blur-md border border-white rounded-2xl sm:rounded-[2rem] shadow-lg transition-all duration-500 hover:-translate-y-2 sm:hover:-translate-y-4 hover:shadow-2xl overflow-hidden cursor-pointer">
+          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 sm:w-32 sm:h-32 bg-blue-400 rounded-full blur-2xl opacity-20 group-hover:opacity-60 transition-opacity duration-500"></div>
+          <div class="relative z-10 h-32 sm:h-40 md:h-48 flex items-center justify-center w-full">
+            <img src="assets/tier-graphics/ic_velocity.PNG" alt="Velocity" class="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 object-contain drop-shadow-xl transform transition-transform duration-500 group-hover:scale-110 floating-img" style="animation-delay: 0.4s;">
+          </div>
+          <div class="relative z-10 text-center mt-2 sm:mt-4">
+            <span class="block text-[10px] sm:text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Tier 3</span>
+            <span class="block text-base sm:text-xl md:text-2xl font-black text-blue-700">Velocity</span>
+          </div>
+        </div>
+
+        <div class="group relative flex flex-col items-center justify-between p-4 sm:p-6 bg-white bg-opacity-60 backdrop-blur-md border border-white rounded-2xl sm:rounded-[2rem] shadow-lg transition-all duration-500 hover:-translate-y-2 sm:hover:-translate-y-4 hover:shadow-2xl overflow-hidden cursor-pointer">
+          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 sm:w-32 sm:h-32 bg-purple-400 rounded-full blur-2xl opacity-20 group-hover:opacity-60 transition-opacity duration-500"></div>
+          <div class="relative z-10 h-32 sm:h-40 md:h-48 flex items-center justify-center w-full">
+            <img src="assets/tier-graphics/ic_supersonic.PNG" alt="Supersonic" class="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 object-contain drop-shadow-xl transform transition-transform duration-500 group-hover:scale-110 floating-img" style="animation-delay: 0.6s;">
+          </div>
+          <div class="relative z-10 text-center mt-2 sm:mt-4">
+            <span class="block text-[10px] sm:text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Tier 4</span>
+            <span class="block text-base sm:text-xl md:text-2xl font-black text-purple-700">Supersonic</span>
+          </div>
+        </div>
+
+        <div class="group relative flex flex-col items-center justify-between p-4 sm:p-6 bg-white bg-opacity-60 backdrop-blur-md border border-yellow-200 rounded-2xl sm:rounded-[2rem] shadow-lg transition-all duration-500 hover:-translate-y-2 sm:hover:-translate-y-4 hover:shadow-2xl hover:shadow-yellow-400/30 overflow-hidden cursor-pointer col-span-2 md:col-span-3 lg:col-span-1">
+          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 sm:w-40 sm:h-40 bg-yellow-400 rounded-full blur-3xl opacity-30 group-hover:opacity-80 transition-opacity duration-500"></div>
+          <div class="relative z-10 h-32 sm:h-40 md:h-48 flex items-center justify-center w-full">
+            <img src="assets/tier-graphics/ic_lightspeed.PNG" alt="Lightspeed" class="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 object-contain drop-shadow-2xl transform transition-transform duration-500 group-hover:scale-110 floating-img" style="animation-delay: 0.6s;">
+          </div>
+          <div class="relative z-10 text-center mt-2 sm:mt-4">
+            <span class="block text-[10px] sm:text-xs font-bold text-yellow-600 uppercase tracking-widest mb-1">Tier 5</span>
+            <span class="block text-lg sm:text-2xl md:text-3xl font-black text-yellow-700">Lightspeed</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+      
+      <div class="bento-card p-6 sm:p-8" data-aos="fade-up" data-aos-delay="200">
+        <h3 class="text-xl font-bold text-gray-900 border-b border-gray-300 pb-3 mb-4">Survival Mode XP</h3>
+        <ul class="space-y-3 text-gray-700 font-medium">
+          <li class="flex justify-between items-center"><span>Easy Difficulty:</span> <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded-md text-sm font-bold">+1 XP / word</span></li>
+          <li class="flex justify-between items-center"><span>Medium Difficulty:</span> <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded-md text-sm font-bold">+3 XP / word</span></li>
+          <li class="flex justify-between items-center"><span>Hard Difficulty:</span> <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded-md text-sm font-bold">+5 XP / word</span></li>
+        </ul>
+        
+        <h3 class="text-xl font-bold text-gray-900 border-b border-gray-300 pb-3 mt-8 mb-4">The Ad Vault</h3>
+        <p class="text-gray-700 text-sm mb-2">Need an extra boost? Watch an ad in any mode to instantly earn bonus XP.</p>
+        <div class="flex items-center gap-2 text-yellow-600 font-extrabold bg-yellow-100 px-3 py-2 rounded-lg w-max shadow-sm text-sm sm:text-base">
+          🎬 Watch Ad = +10 XP
+        </div>
+      </div>
+
+      <div class="bento-card p-6 sm:p-8" data-aos="fade-up" data-aos-delay="300">
+        <h3 class="text-xl font-bold text-gray-900 border-b border-gray-300 pb-3 mb-4">Paragraph Mode XP</h3>
+        <ul class="space-y-3 text-gray-700 font-medium text-sm">
+          <li class="flex justify-between"><span>Base Performance:</span> <span class="font-bold">WPM × (Acc %)</span></li>
+          <li class="flex justify-between"><span>Paragraph Completion:</span> <span class="font-bold text-green-600">+20 XP</span></li>
+        </ul>
+        
+        <div class="mt-5 p-4 sm:p-5 bg-blue-50 rounded-xl border border-blue-100 shadow-inner">
+          <span class="block text-xs font-bold text-blue-800 uppercase tracking-wider mb-3">Speed Bonus (Requires >80% Acc)</span>
+          <ul class="space-y-2 text-sm text-gray-700">
+            <li class="flex justify-between border-b border-blue-100/50 pb-2"><span>0 - 30 WPM</span> <span class="font-bold">+15 XP</span></li>
+            <li class="flex justify-between border-b border-blue-100/50 pb-2"><span>31 - 60 WPM</span> <span class="font-bold">+30 XP</span></li>
+            <li class="flex justify-between border-b border-blue-100/50 pb-2"><span>61 - 90 WPM</span> <span class="font-bold">+45 XP</span></li>
+            <li class="flex justify-between pt-1"><span>91+ WPM</span> <span class="font-bold text-purple-600">+50 XP</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bento-card p-6 sm:p-8" data-aos="fade-up" data-aos-delay="400">
+        <h3 class="text-xl font-bold text-gray-900 border-b border-gray-300 pb-3 mb-4">Multiplayer Arena XP</h3>
+        <ul class="space-y-3 text-gray-700 font-medium text-sm">
+          <li class="flex justify-between"><span>Base Performance:</span> <span class="font-bold">WPM × (Acc %)</span></li>
+          <li class="flex justify-between"><span>Match Win:</span> <span class="font-bold text-green-600">+75 XP</span></li>
+          <li class="flex justify-between"><span>Match Draw:</span> <span class="font-bold text-yellow-600">+30 XP</span></li>
+          <li class="flex justify-between text-gray-400"><span>Match Lose:</span> <span>+0 XP</span></li>
+        </ul>
+
+        <div class="mt-5 p-4 sm:p-5 bg-blue-50 rounded-xl border border-blue-100 shadow-inner">
+          <span class="block text-xs font-bold text-blue-800 uppercase tracking-wider mb-3">Milestone Bonus (Requires >80% Acc)</span>
+          <ul class="space-y-2 text-sm text-gray-700">
+            <li class="flex justify-between border-b border-blue-100/50 pb-2"><span>If you WIN</span> <span class="font-bold text-purple-600">+50 XP</span></li>
+            <li class="flex justify-between border-b border-blue-100/50 pb-2"><span>If you DRAW</span> <span class="font-bold">+30 XP</span></li>
+            <li class="flex justify-between pt-1"><span>If you LOSE</span> <span class="font-bold">+10 XP</span></li>
+          </ul>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- Call to Action -->
-  <section class="py-16 px-6 bg-blue-600 text-white text-center">
-    <h2 class="text-3xl font-bold mb-4">Ready to boost your typing skills?</h2>
-    <a href="https://play.google.com/store/apps/details?id=com.samarthshukla.protyper" class="px-8 py-3 bg-white text-blue-600 font-semibold rounded-xl shadow hover:bg-gray-100">Get Pro Typer on Play Store</a>
+  <section class="py-16 sm:py-24 px-4 sm:px-6 relative z-10">
+    <div class="max-w-4xl mx-auto text-center bento-card p-8 sm:p-12" data-aos="zoom-in" data-aos-delay="100">
+      <h2 class="text-3xl sm:text-4xl font-extrabold mb-4 sm:mb-6 text-gray-900">Ready to boost your skills?</h2>
+      <p class="text-lg sm:text-xl text-gray-700 mb-6 sm:mb-8 font-medium">Join thousands of players and start climbing the ranks today.</p>
+      <a href="https://play.google.com/store/apps/details?id=com.samarthshukla.protyper" class="inline-block px-8 sm:px-10 py-3 sm:py-4 bg-blue-600 text-white font-bold rounded-full shadow-xl hover:bg-blue-700 transition-transform transform hover:-translate-y-1 w-full sm:w-auto">
+        Download Now - It's Free!
+      </a>
+    </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="bg-gray-800 text-white py-8">
-    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
-      <p class="mb-4 md:mb-0">&copy; 2025 Pro Typer. All rights reserved.</p>
-      <div class="flex gap-6 mb-4 md:mb-0">
-        <a href="https://www.instagram.com/pro.typer.info?igsh=Z2NjNGcxaXJzemV0" target="_blank" class="hover:underline">Instagram</a>
-        <a href="https://www.facebook.com/share/1Bh5F5zoy5/" target="_blank" class="hover:underline">Facebook</a>
-        <a href="aboutus.html" target="_blank" class="hover:underline">About Us</a>
+  <footer class="bg-white bg-opacity-80 backdrop-blur-md border-t border-blue-100 py-8 sm:py-10 relative z-10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row justify-between items-center gap-6 text-gray-700 font-semibold text-center md:text-left">
+      <div class="flex items-center gap-3">
+        <img src="assets/logo.png" alt="Pro Typer Logo" class="w-8 h-8 rounded-lg opacity-80" />
+        <p>&copy; 2026 Pro Typer. All rights reserved.</p>
       </div>
-      <a href="privacy-policy.html" class="hover:underline">Privacy Policy</a>
+      
+      <div class="flex flex-wrap justify-center gap-4 sm:gap-8 text-sm sm:text-base">
+        <a href="https://www.instagram.com/pro.typer.info" target="_blank" class="hover:text-blue-600 transition-colors">Instagram</a>
+        <a href="https://www.facebook.com/share/1A2Ar6a1Gp/" target="_blank" class="hover:text-blue-600 transition-colors">Facebook</a>
+        <a href="https://crowdfund.org/c/support-us-by-donating-a-little-share-of-yours/" target="_blank" class="hover:text-blue-600 transition-colors">Support Us</a>
+        <a href="aboutus.html" class="hover:text-blue-600 transition-colors">Developers</a>
+        <a href="privacy-policy.html" class="hover:text-blue-600 transition-colors">Privacy Policy</a>
+      </div>
     </div>
   </footer>
 
-  <!-- AOS (Animate on Scroll) JS -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
+    const canvas = document.getElementById('groovy-canvas');
+    const ctx = canvas.getContext('2d');
+    
+    let width, height;
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    const waveColors = ['#E3F2FD', '#BBDEFB', '#90CAF9', '#64B5F6'];
+    let timeOffset = 0;
+
+    function drawGroovyWaves() {
+      ctx.clearRect(0, 0, width, height);
+      
+      ctx.fillStyle = waveColors[0];
+      ctx.fillRect(0, 0, width, height);
+
+      for (let i = 1; i < waveColors.length; i++) {
+        ctx.beginPath();
+        ctx.moveTo(0, height);
+        ctx.lineTo(0, height * 0.1);
+        
+        let amplitude = height * 0.12;
+        let frequency = (Math.PI / width) * 1.2;
+        let speedModifier = i * 0.7;
+        let phaseShift = timeOffset * speedModifier;
+        let verticalOffset = (height * 0.22) * i;
+
+        for (let x = 0; x <= width + 30; x += 30) {
+          let y = Math.sin((x * frequency) + phaseShift) * amplitude + verticalOffset;
+          ctx.lineTo(x, y);
+        }
+        
+        ctx.lineTo(width, height);
+        ctx.closePath();
+        
+        ctx.fillStyle = waveColors[i];
+        ctx.fill();
+      }
+      
+      timeOffset += 0.0015;
+      requestAnimationFrame(drawGroovyWaves);
+    }
+    
+    drawGroovyWaves();
+
     AOS.init({
       duration: 800,
       once: true,
+      offset: 50,
     });
-  </script>
 
-<script>
-  document.getElementById('exploreBtn').addEventListener('click', function(event) {
-    event.preventDefault();
-    document.querySelector('#features').scrollIntoView({ behavior: 'smooth' });
-  });
-</script>
+    document.getElementById('exploreBtn').addEventListener('click', function(event) {
+      event.preventDefault();
+      document.querySelector('#features').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    const textToType = "Type Fast. Race Faster. 🚀";
+    const typewriterElement = document.getElementById("typewriter");
+    let charIndex = 0;
+
+    function typeWriter() {
+      if (charIndex < textToType.length) {
+        typewriterElement.textContent += textToType.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeWriter, 90);
+      } else {
+        setTimeout(() => {
+          typewriterElement.classList.remove('cursor');
+        }, 2000);
+      }
+    }
+
+    setTimeout(typeWriter, 400);
+  </script>
 
 </body>
 </html>
